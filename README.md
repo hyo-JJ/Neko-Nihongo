@@ -13,7 +13,6 @@
 | `02_words_data.sql` | 단어 1,770개 INSERT SQL (바로 import 가능) |
 | `02_excel_to_sql.py` | 엑셀 → SQL 재변환 스크립트 (수정 필요 시) |
 | `03_sentences_data.sql` | N3 예시 문장 100개 + 퀴즈 30개 INSERT SQL |
-| `japanese_n3_db_setup.ipynb` | 구글 코랩 노트북 (SQL 생성 자동화) |
 | `VocabList_N3.xlsx` | 원본 단어 엑셀 파일 |
 
 ---
