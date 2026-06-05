@@ -2,6 +2,8 @@ package com.nihongo.filter;
 
 import jakarta.servlet.*;          // 서블릿 필터 관련 인터페이스
 import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -34,6 +36,18 @@ public class EncodingFilter implements Filter {
 
         // 응답 인코딩: 서버에서 클라이언트로 보내는 데이터를 UTF-8로 전송
         response.setCharacterEncoding("UTF-8");
+
+        // CORS 헤더: Firebase 등 외부 도메인에서의 요청을 허용
+        HttpServletResponse res = (HttpServletResponse) response;
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+        // OPTIONS 프리플라이트 요청은 바로 200 응답
+        if ("OPTIONS".equalsIgnoreCase(((HttpServletRequest) request).getMethod())) {
+            res.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
 
         /*
           chain.doFilter(): 이 줄이 있어야 다음 서블릿(SignupServlet 등)으로 요청이 전달됨
