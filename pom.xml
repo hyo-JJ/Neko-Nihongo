@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.nihongo</groupId>
+  <artifactId>bacaked</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>N3 일본어 학습 백엔드</name>
+
+  <properties>
+    <!-- Java 11로 컴파일 설정 -->
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <!-- 소스 파일 인코딩: 한글·일본어 깨짐 방지 -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+
+    <!--
+      Servlet API
+      HttpServlet, HttpServletRequest, HttpServletResponse 등
+      HTTP 요청/응답을 다루는 자바 표준 라이브러리
+      scope=provided: Tomcat 서버가 이미 포함하고 있으므로
+                      WAR 배포 파일에는 포함하지 않음
+    -->
+    <!-- Tomcat 10+ 는 jakarta.servlet 네임스페이스 사용 -->
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--
+      MySQL JDBC Driver
+      Java 코드에서 MySQL DB에 연결할 때 사용하는 드라이버
+      DBConnection.java에서 DriverManager.getConnection()을 호출할 때 내부적으로 사용됨
+    -->
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+      <version>8.0.33</version>
+    </dependency>
+
+    <!--
+      jBCrypt
+      비밀번호를 안전하게 해시(암호화)하는 라이브러리
+      원본 비밀번호를 DB에 저장하면 유출 시 위험하므로
+      BCrypt.hashpw()로 복호화 불가능한 해시값으로 변환해 저장함
+      로그인 시에는 BCrypt.checkpw()로 입력값과 저장된 해시를 비교
+    -->
+    <dependency>
+      <groupId>org.mindrot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>0.4</version>
+    </dependency>
+
+    <!--
+      Jackson Databind
+      Java 객체 ↔ JSON 변환 라이브러리
+      - React에서 fetch()로 보낸 JSON 요청 본문 → Java 객체로 파싱
+      - Java 응답 객체 → JSON 문자열로 변환해서 프론트에 전송
+    -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.15.2</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <finalName>bacaked</finalName>
+  </build>
+
+</project>
