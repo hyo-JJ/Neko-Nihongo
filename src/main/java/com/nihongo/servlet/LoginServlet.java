@@ -170,8 +170,9 @@ public class LoginServlet extends HttpServlet {
      */
     private void setCorsHeaders(HttpServletRequest req, HttpServletResponse resp) {
         String origin = req.getHeader("Origin");
-        // localhost 에서 온 요청이면 해당 Origin 그대로 허용
-        if (origin != null && origin.startsWith("http://localhost")) {
+        if (origin != null && (origin.startsWith("http://localhost")
+                || origin.endsWith(".web.app")
+                || origin.endsWith(".firebaseapp.com"))) {
             resp.setHeader("Access-Control-Allow-Origin", origin);
         }
         resp.setHeader("Access-Control-Allow-Methods",     "GET, POST, OPTIONS");

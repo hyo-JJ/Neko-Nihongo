@@ -141,7 +141,9 @@ public class SignupServlet extends HttpServlet {
 
     private void setCorsHeaders(HttpServletRequest req, HttpServletResponse resp) {
         String origin = req.getHeader("Origin");
-        if (origin != null && origin.startsWith("http://localhost")) {
+        if (origin != null && (origin.startsWith("http://localhost")
+                || origin.endsWith(".web.app")
+                || origin.endsWith(".firebaseapp.com"))) {
             resp.setHeader("Access-Control-Allow-Origin", origin);
         }
         resp.setHeader("Access-Control-Allow-Methods",     "GET, POST, OPTIONS");
