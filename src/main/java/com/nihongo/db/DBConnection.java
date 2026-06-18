@@ -32,7 +32,7 @@ public class DBConnection {
     // 환경변수에서 DB 접속 정보를 읽음 (없으면 로컬 개발용 기본값 사용)
     private static final String HOST     = getEnv("MYSQLHOST",     "localhost");
     private static final String PORT     = getEnv("MYSQLPORT",     "3306");
-    private static final String DATABASE = getEnv("MYSQLDATABASE", "japanese_n3");
+    private static final String DATABASE = getEnv("MYSQLDATABASE", "neko_nihongo");
     private static final String USER     = getEnv("MYSQLUSER",     "root");
     private static final String PASSWORD = getEnv("MYSQLPASSWORD", "hyo103525");
 
